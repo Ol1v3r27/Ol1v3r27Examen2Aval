@@ -7,12 +7,12 @@ while [ $ciudad != 'Valencia' ] && [ $ciudad != 'Barcelona' ] && [ $ciudad != 'M
     echo ""
     read -p "Escribe una ciudad de España: " ciudad
 done
+
 echo ""
+
 contador=$(cat consumos.txt | grep $ciudad | awk '{ print $4 }' | wc -l)
-ciudades=$(cat consumos.txt | grep $ciudad | awk '{ print $4 }')
-echo $ciudades
-echo $contador
 for ((i = 1; i <= $contador; i++)); do
-    sumatorio=$(sumatorio + ciudades)
+    ciudades=$(cat consumos.txt | grep $ciudad | head -n$i | tail -n1 | awk '{ print $4 }')
+    sumatorio=$((sumatorio + ciudades))
 done
 echo "Consumo total de $ciudad: $sumatorio"
